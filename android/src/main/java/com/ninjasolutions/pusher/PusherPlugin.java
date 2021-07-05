@@ -114,10 +114,12 @@ public class PusherPlugin implements MethodCallHandler {
 
     private void init(MethodCall call, Result result) {
         if (pusher != null) {
-            for (Map.Entry<String, Channel> entry : channels.entrySet()) {
+            Iterator<Map.Entry<String, Channel>> iter = channels.entrySet().iterator();
+            while (iter.hasNext()) {
+                Map.Entry<String, Channel> entry = iter.next();
                 String name = entry.getKey();
                 pusher.unsubscribe(name);
-                channels.remove(name);
+                iter.remove(name);
             }
         }
 
