@@ -3,6 +3,7 @@ package com.ninjasolutions.pusher;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import java.util.Iterator;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -117,9 +118,8 @@ public class PusherPlugin implements MethodCallHandler {
             Iterator<Map.Entry<String, Channel>> iter = channels.entrySet().iterator();
             while (iter.hasNext()) {
                 Map.Entry<String, Channel> entry = iter.next();
-                String name = entry.getKey();
-                pusher.unsubscribe(name);
-                iter.remove(name);
+                pusher.unsubscribe(entry.getKey());
+                iter.remove();
             }
         }
 
